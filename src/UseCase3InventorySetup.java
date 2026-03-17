@@ -1,30 +1,38 @@
+import java.util.Map;
+
 /**
  * MAIN CLASS - UseCase3InventorySetup
- * Demonstrates centralized inventory management using HashMap.
+ * This class demonstrates how room availability is managed using
+ * a centralized inventory.
  * @version 3.0
  */
 public class UseCase3InventorySetup {
+
     public static void main(String[] args) {
         System.out.println("Hotel Room Inventory Status\n");
 
-        // Initialize the centralized inventory
+        // Initialize centralized inventory
         RoomInventory inventory = new RoomInventory();
-        Map<String, Integer> availability = inventory.getRoomAvailability();
+        Map<String, Integer> currentAvailability = inventory.getRoomAvailability();
 
-        // Create Room objects to get their intrinsic characteristics
+        // Initialize Room objects (from Use Case 2)
         Room single = new SingleRoom();
         Room doubleRoom = new DoubleRoom();
         Room suite = new SuiteRoom();
 
-        // Displaying data by combining Room details + Inventory counts
-        displayStatus("Single Room", single, availability.get("Single Room"));
-        displayStatus("Double Room", doubleRoom, availability.get("Double Room"));
-        displayStatus("Suite Room", suite, availability.get("Suite Room"));
-    }
+        // Print Single Room Status
+        System.out.println("Single Room:");
+        single.displayRoomDetails();
+        System.out.println("Available Rooms: " + currentAvailability.get("Single Room") + "\n");
 
-    private static void displayStatus(String label, Room room, int count) {
-        System.out.println(label + ":");
-        room.displayRoomDetails();
-        System.out.println("Available Rooms: " + count + "\n");
+        // Print Double Room Status
+        System.out.println("Double Room:");
+        doubleRoom.displayRoomDetails();
+        System.out.println("Available Rooms: " + currentAvailability.get("Double Room") + "\n");
+
+        // Print Suite Room Status
+        System.out.println("Suite Room:");
+        suite.displayRoomDetails();
+        System.out.println("Available Rooms: " + currentAvailability.get("Suite Room"));
     }
 }
