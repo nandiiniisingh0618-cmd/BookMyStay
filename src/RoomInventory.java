@@ -1,51 +1,34 @@
+import java.io.Serializable; // 1. Add this import
 import java.util.HashMap;
 import java.util.Map;
 
 /**
  * CLASS - RoomInventory
- * Use Case 3: Centralized Room Inventory Management
- * This class acts as the single source of truth for room availability.
- * @version 3.0
+ * Updated for Use Case 12: Data Persistence
+ * @version 12.0
  */
-public class RoomInventory {
+public class RoomInventory implements Serializable { // 2. Add 'implements Serializable'
 
-    /**
-     * Stores available room count for each room type.
-     * Key -> Room type name
-     * Value -> Available room count
-     */
+    // 3. Add the serialVersionUID
+    private static final long serialVersionUID = 1L;
+
     private Map<String, Integer> roomAvailability;
 
-    /**
-     * Constructor initializes the inventory with default values.
-     */
     public RoomInventory() {
         this.roomAvailability = new HashMap<>();
         initializeInventory();
     }
 
-    /**
-     * Centralizes inventory setup instead of using scattered variables.
-     */
     private void initializeInventory() {
         roomAvailability.put("Single Room", 5);
         roomAvailability.put("Double Room", 3);
         roomAvailability.put("Suite Room", 2);
     }
 
-    /**
-     * Returns the current availability map.
-     * @return map of room type to available count
-     */
     public Map<String, Integer> getRoomAvailability() {
         return roomAvailability;
     }
 
-    /**
-     * Updates availability for a specific room type.
-     * @param roomType the room type to update
-     * @param count new availability count
-     */
     public void updateAvailability(String roomType, int count) {
         roomAvailability.put(roomType, count);
     }
